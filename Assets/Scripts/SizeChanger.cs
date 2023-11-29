@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CapsuleChangeSize : MonoBehaviour
+public class SizeChanger : MonoBehaviour
 {
     [SerializeField] private float _speed;
 

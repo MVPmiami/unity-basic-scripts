@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SphereMovement : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     [SerializeField] private float _distance;
     [SerializeField] private float _speed;
