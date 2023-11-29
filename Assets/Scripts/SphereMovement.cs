@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class SphereMovement : MonoBehaviour
 {
-    private Transform _transform;
+    [SerializeField] private float _distance;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _rotateAngle;
+
     private Vector3 _newPosition;
     private Vector3 _startPosition;
     private float _distanceTraveled;
     private bool _isLeftMoving;
     private float _rotationAmount;
 
-    [SerializeField] private float _distance;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private float _rotateAngle;
-
     private void Start()
     {
-        _transform = GetComponent<Transform>();
-        _startPosition = _transform.position;
+        _startPosition = transform.position;
         _newPosition = new Vector3(_startPosition.x - _distance, _startPosition.y, _startPosition.z);
         _isLeftMoving = true;
         _distanceTraveled = 0f;
@@ -32,10 +30,10 @@ public class SphereMovement : MonoBehaviour
     {
         float step = _speed * Time.deltaTime;
 
-        if (_transform.position == _newPosition)
+        if (transform.position == _newPosition)
             SetNewPosition();
 
-        _transform.position = Vector3.MoveTowards(_transform.position, _newPosition, step);
+        transform.position = Vector3.MoveTowards(transform.position, _newPosition, step);
         _distanceTraveled += step;
         RotateSphere();
     }
@@ -43,7 +41,7 @@ public class SphereMovement : MonoBehaviour
     private void RotateSphere()
     {
         _rotationAmount = (_distanceTraveled / _distance) * (_isLeftMoving ? _rotateAngle : -_rotateAngle);
-        _transform.Rotate(Vector3.forward, _rotationAmount * Time.deltaTime * _rotationSpeed);
+        transform.Rotate(Vector3.forward, _rotationAmount * Time.deltaTime * _rotationSpeed);
     }
 
     private void SetNewPosition()
